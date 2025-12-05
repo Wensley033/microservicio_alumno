@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### H2 Database Files (persistencia local) ###
+/data/
+*.db
+*.trace.db
+*.lock.db
+
+### Application-specific ###
+application-local.properties

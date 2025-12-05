@@ -32,140 +32,78 @@ public class GrupoController {
 
     @GetMapping
     public ResponseEntity<List<GrupoDto>> obtenerTodos() {
-        try {
-            List<GrupoDto> grupos = grupoService.obtenerTodos();
-            return ResponseEntity.ok(grupos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<GrupoDto> grupos = grupoService.obtenerTodos();
+        return ResponseEntity.ok(grupos);
     }
 
     @GetMapping("/activos")
     public ResponseEntity<List<GrupoDto>> obtenerActivos() {
-        try {
-            List<GrupoDto> grupos = grupoService.obtenerActivos();
-            return ResponseEntity.ok(grupos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<GrupoDto> grupos = grupoService.obtenerActivos();
+        return ResponseEntity.ok(grupos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<GrupoDto> obtenerPorId(@PathVariable Long id) {
-        try {
-            GrupoDto grupo = grupoService.obtenerPorId(id);
-            return ResponseEntity.ok(grupo);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        GrupoDto grupo = grupoService.obtenerPorId(id);
+        return ResponseEntity.ok(grupo);
     }
 
     @GetMapping("/{id}/detalles")
     public ResponseEntity<GrupoViewDto> obtenerGrupoConDetalles(@PathVariable Long id) {
-        try {
-            GrupoViewDto grupo = grupoService.obtenerGrupoConDetalles(id);
-            return ResponseEntity.ok(grupo);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        GrupoViewDto grupo = grupoService.obtenerGrupoConDetalles(id);
+        return ResponseEntity.ok(grupo);
     }
 
     @GetMapping("/{id}/alumnos")
     public ResponseEntity<List<AlumnoDto>> obtenerAlumnosDelGrupo(@PathVariable Long id) {
-        try {
-            List<AlumnoDto> alumnos = alumnoService.obtenerPorGrupo(id);
-            return ResponseEntity.ok(alumnos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<AlumnoDto> alumnos = alumnoService.obtenerPorGrupo(id);
+        return ResponseEntity.ok(alumnos);
     }
 
     @GetMapping("/programa-educativo/{programaEducativoId}")
     public ResponseEntity<List<GrupoDto>> obtenerPorProgramaEducativo(
             @PathVariable Long programaEducativoId) {
-        try {
-            List<GrupoDto> grupos = grupoService.obtenerPorProgramaEducativo(programaEducativoId);
-            return ResponseEntity.ok(grupos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<GrupoDto> grupos = grupoService.obtenerPorProgramaEducativo(programaEducativoId);
+        return ResponseEntity.ok(grupos);
     }
 
     @GetMapping("/profesor/{profesorId}")
     public ResponseEntity<List<GrupoDto>> obtenerPorProfesor(@PathVariable Long profesorId) {
-        try {
-            List<GrupoDto> grupos = grupoService.obtenerPorProfesor(profesorId);
-            return ResponseEntity.ok(grupos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<GrupoDto> grupos = grupoService.obtenerPorProfesor(profesorId);
+        return ResponseEntity.ok(grupos);
     }
 
     @PostMapping
     public ResponseEntity<GrupoDto> crear(@Valid @RequestBody GrupoDto grupoDto) {
-        try {
-            GrupoDto nuevoGrupo = grupoService.crear(grupoDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(nuevoGrupo);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        GrupoDto nuevoGrupo = grupoService.crear(grupoDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoGrupo);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<GrupoDto> actualizar(
             @PathVariable Long id,
             @Valid @RequestBody GrupoDto grupoDto) {
-        try {
-            GrupoDto grupoActualizado = grupoService.actualizar(id, grupoDto);
-            return ResponseEntity.ok(grupoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        GrupoDto grupoActualizado = grupoService.actualizar(id, grupoDto);
+        return ResponseEntity.ok(grupoActualizado);
     }
 
     @PatchMapping("/{id}/asignar-profesor/{profesorId}")
     public ResponseEntity<GrupoDto> asignarProfesor(
             @PathVariable Long id,
             @PathVariable Long profesorId) {
-        try {
-            GrupoDto grupoActualizado = grupoService.asignarProfesor(id, profesorId);
-            return ResponseEntity.ok(grupoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        GrupoDto grupoActualizado = grupoService.asignarProfesor(id, profesorId);
+        return ResponseEntity.ok(grupoActualizado);
     }
 
     @PatchMapping("/{id}/toggle-activo")
     public ResponseEntity<GrupoDto> toggleActivo(@PathVariable Long id) {
-        try {
-            GrupoDto grupoActualizado = grupoService.toggleActivo(id);
-            return ResponseEntity.ok(grupoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        GrupoDto grupoActualizado = grupoService.toggleActivo(id);
+        return ResponseEntity.ok(grupoActualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        try {
-            grupoService.eliminar(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        grupoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

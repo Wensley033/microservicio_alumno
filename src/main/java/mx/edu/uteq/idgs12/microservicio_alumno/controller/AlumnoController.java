@@ -31,153 +31,85 @@ public class AlumnoController {
 
     @GetMapping
     public ResponseEntity<List<AlumnoDto>> obtenerTodos() {
-        try {
-            List<AlumnoDto> alumnos = alumnoService.obtenerTodos();
-            return ResponseEntity.ok(alumnos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<AlumnoDto> alumnos = alumnoService.obtenerTodos();
+        return ResponseEntity.ok(alumnos);
     }
 
     @GetMapping("/activos")
     public ResponseEntity<List<AlumnoDto>> obtenerActivos() {
-        try {
-            List<AlumnoDto> alumnos = alumnoService.obtenerActivos();
-            return ResponseEntity.ok(alumnos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<AlumnoDto> alumnos = alumnoService.obtenerActivos();
+        return ResponseEntity.ok(alumnos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AlumnoDto> obtenerPorId(@PathVariable Long id) {
-        try {
-            AlumnoDto alumno = alumnoService.obtenerPorId(id);
-            return ResponseEntity.ok(alumno);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoDto alumno = alumnoService.obtenerPorId(id);
+        return ResponseEntity.ok(alumno);
     }
 
     @GetMapping("/{id}/detalles")
     public ResponseEntity<AlumnoViewDto> obtenerAlumnoConDetalles(@PathVariable Long id) {
-        try {
-            AlumnoViewDto alumno = alumnoService.obtenerAlumnoConDetalles(id);
-            return ResponseEntity.ok(alumno);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoViewDto alumno = alumnoService.obtenerAlumnoConDetalles(id);
+        return ResponseEntity.ok(alumno);
     }
 
     @GetMapping("/matricula/{matricula}")
     public ResponseEntity<AlumnoDto> obtenerPorMatricula(@PathVariable String matricula) {
-        try {
-            AlumnoDto alumno = alumnoService.obtenerPorMatricula(matricula);
-            return ResponseEntity.ok(alumno);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoDto alumno = alumnoService.obtenerPorMatricula(matricula);
+        return ResponseEntity.ok(alumno);
     }
 
     @GetMapping("/grupo/{grupoId}")
     public ResponseEntity<List<AlumnoDto>> obtenerPorGrupo(@PathVariable Long grupoId) {
-        try {
-            List<AlumnoDto> alumnos = alumnoService.obtenerPorGrupo(grupoId);
-            return ResponseEntity.ok(alumnos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<AlumnoDto> alumnos = alumnoService.obtenerPorGrupo(grupoId);
+        return ResponseEntity.ok(alumnos);
     }
 
     @GetMapping("/programa-educativo/{programaEducativoId}")
     public ResponseEntity<List<AlumnoDto>> obtenerPorProgramaEducativo(
             @PathVariable Long programaEducativoId) {
-        try {
-            List<AlumnoDto> alumnos = alumnoService.obtenerPorProgramaEducativo(programaEducativoId);
-            return ResponseEntity.ok(alumnos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<AlumnoDto> alumnos = alumnoService.obtenerPorProgramaEducativo(programaEducativoId);
+        return ResponseEntity.ok(alumnos);
     }
 
     @GetMapping("/buscar")
     public ResponseEntity<List<AlumnoDto>> buscarPorNombreOApellido(
             @RequestParam String termino) {
-        try {
-            List<AlumnoDto> alumnos = alumnoService.buscarPorNombreOApellido(termino);
-            return ResponseEntity.ok(alumnos);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<AlumnoDto> alumnos = alumnoService.buscarPorNombreOApellido(termino);
+        return ResponseEntity.ok(alumnos);
     }
 
     @PostMapping
     public ResponseEntity<AlumnoDto> crear(@Valid @RequestBody AlumnoDto alumnoDto) {
-        try {
-            AlumnoDto nuevoAlumno = alumnoService.crear(alumnoDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(nuevoAlumno);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoDto nuevoAlumno = alumnoService.crear(alumnoDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoAlumno);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AlumnoDto> actualizar(
             @PathVariable Long id,
             @Valid @RequestBody AlumnoDto alumnoDto) {
-        try {
-            AlumnoDto alumnoActualizado = alumnoService.actualizar(id, alumnoDto);
-            return ResponseEntity.ok(alumnoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoDto alumnoActualizado = alumnoService.actualizar(id, alumnoDto);
+        return ResponseEntity.ok(alumnoActualizado);
     }
 
     @PatchMapping("/{id}/cambiar-grupo")
     public ResponseEntity<AlumnoDto> cambiarGrupo(
             @PathVariable Long id,
             @Valid @RequestBody CambiarGrupoDto dto) {
-        try {
-            AlumnoDto alumnoActualizado = alumnoService.cambiarGrupo(id, dto.getNuevoGrupoId());
-            return ResponseEntity.ok(alumnoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoDto alumnoActualizado = alumnoService.cambiarGrupo(id, dto.getNuevoGrupoId());
+        return ResponseEntity.ok(alumnoActualizado);
     }
 
     @PatchMapping("/{id}/toggle-activo")
     public ResponseEntity<AlumnoDto> toggleActivo(@PathVariable Long id) {
-        try {
-            AlumnoDto alumnoActualizado = alumnoService.toggleActivo(id);
-            return ResponseEntity.ok(alumnoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        AlumnoDto alumnoActualizado = alumnoService.toggleActivo(id);
+        return ResponseEntity.ok(alumnoActualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        try {
-            alumnoService.eliminar(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        alumnoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }
